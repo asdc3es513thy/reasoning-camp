@@ -300,6 +300,9 @@
   .mr-1 {
     margin-right: var(--spacing);
   }
+  .mb-0\.5 {
+    margin-bottom: calc(var(--spacing) * 0.5);
+  }
   .mb-1 {
     margin-bottom: var(--spacing);
   }
@@ -657,6 +660,12 @@
       border-color: color-mix(in oklab, var(--color-rose-500) 40%, transparent);
     }
   }
+  .border-rose-500\/50 {
+    border-color: color-mix(in srgb, oklch(64.5% 0.246 16.439) 50%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--color-rose-500) 50%, transparent);
+    }
+  }
   .border-sky-500\/40 {
     border-color: color-mix(in srgb, oklch(68.5% 0.169 237.323) 40%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
@@ -753,12 +762,6 @@
       background-color: color-mix(in oklab, var(--color-cyan-950) 20%, transparent);
     }
   }
-  .bg-cyan-950\/25 {
-    background-color: color-mix(in srgb, oklch(30.2% 0.056 229.695) 25%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      background-color: color-mix(in oklab, var(--color-cyan-950) 25%, transparent);
-    }
-  }
   .bg-cyan-950\/30 {
     background-color: color-mix(in srgb, oklch(30.2% 0.056 229.695) 30%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
@@ -814,6 +817,12 @@
     background-color: color-mix(in srgb, oklch(26.2% 0.051 172.552) 20%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--color-emerald-950) 20%, transparent);
+    }
+  }
+  .bg-emerald-950\/30 {
+    background-color: color-mix(in srgb, oklch(26.2% 0.051 172.552) 30%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-emerald-950) 30%, transparent);
     }
   }
   .bg-fuchsia-500\/10 {
@@ -877,12 +886,6 @@
     background-color: color-mix(in srgb, oklch(58.6% 0.253 17.585) 80%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--color-rose-600) 80%, transparent);
-    }
-  }
-  .bg-rose-950\/25 {
-    background-color: color-mix(in srgb, oklch(27.1% 0.105 12.094) 25%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      background-color: color-mix(in oklab, var(--color-rose-950) 25%, transparent);
     }
   }
   .bg-rose-950\/30 {
@@ -1416,6 +1419,14 @@
     .hover\:bg-emerald-500:hover {
       background-color: var(--color-emerald-500);
     }
+    .hover\:bg-emerald-500\/30:hover {
+      background-color: color-mix(in srgb, oklch(69.6% 0.17 162.48) 30%, transparent);
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .hover\:bg-emerald-500\/30:hover {
+        background-color: color-mix(in oklab, var(--color-emerald-500) 30%, transparent);
+      }
+    }
     .hover\:bg-fuchsia-500:hover {
       background-color: var(--color-fuchsia-500);
     }
@@ -1820,7 +1831,7 @@
     <div class="max-w-7xl mx-auto px-4 py-3.5 flex flex-col xl:flex-row xl:items-center xl:justify-between gap-3">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 via-purple-500 to-emerald-400 flex items-center justify-center text-white font-black text-base shadow-lg shrink-0">
-          v11
+          v12
         </div>
         <div>
           <div class="flex items-center gap-2 flex-wrap">
@@ -2145,12 +2156,12 @@
             👀 見到題目邊個字眼／特徵 ➔ ❓ 即刻問自己一條靈魂問題 ➔ 🔧 調用對應原理。例如見到「至少一個」就諗補集，見到「乘 252」就諗量綱。
           </div>
           <div class="p-3 rounded-xl bg-slate-950 border-l-4 border-rose-400">
-            <strong class="text-rose-300">② 思考過程（直覺 vs 驗證）：</strong><br>
-            先寫低普通人嘅直覺答案，再用第一性原理同反例去攻擊佢，睇吓直覺喺邊度斷裂。
+            <strong class="text-rose-300">② 思考過程（第一性原理五步）：</strong><br>
+            ②-1【睇】抄低題目講明嘅事實 ➔ ②-2 寫低直覺答案 ➔ ②-3【估】搵出直覺偷偷靠嘅假設 ➔ ②-4【必】拆到定義、計數或守恆 ➔ ②-5 前提檢查：原理嘅條件喺呢題成唔成立。
           </div>
           <div class="p-3 rounded-xl bg-slate-950 border-l-4 border-emerald-400">
             <strong class="text-emerald-300">③ 具體推理（零跳步執行）：</strong><br>
-            將原理變成 3 個可以逐步檢查嘅計算或判斷，每一步都可以獨立驗證。
+            Step 1–3 逐步計或判斷 ➔ Step 4 用第二條路驗算（代入、細例子、極端、換單位、反證）➔ Step 5 結論要同兩條路都夾。
           </div>
         </div>
       </div>
@@ -2402,13 +2413,4 @@
               🔄 重置模擬器
             </button>
           </div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
-          <div class="lg:col-span-5 space-y-3 bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs">
-            <div class="flex justify-between items-center">
-              <span class="text-slate-400">風控紅線（最大允許回撤 MDD）：</span>
-              <span class="font-mono font-bold text-rose-400">15.00%</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <sp
+        </div
